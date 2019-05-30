@@ -90,8 +90,8 @@ artigoCombinacao(plural, masculino) --> [aos].
 %PRONOMES
 pronome(singular) --> [eu].
 pronome(singular) --> [tu].
-pronome(plural) --> [nós].
-pronome(plural) --> [vós].
+pronome(plural) --> ['nós'].
+pronome(plural) --> ['vós'].
 pronome(singular,masculino) --> [ele].
 pronome(singular,femenino) --> [ela].
 pronome(plural,masculino) --> [eles].
