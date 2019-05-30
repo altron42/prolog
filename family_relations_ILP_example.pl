@@ -34,7 +34,8 @@ female(pat).
 female(eve).
 
 
-% has_daughter(X) <- parent(X,Y) ^ female(Y).
+has_daughter(X):-parent(X,Y),female(Y).
+has_son(X):-parent(X,Y),male(Y).
 
 %———————————————————————————————————————————————
 % Positive examples
