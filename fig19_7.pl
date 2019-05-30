@@ -17,7 +17,7 @@ induce( Hyp)  :-
 
 best_search( [Hyp | Hyps], Hyp)  :-
   show_counts,           % Display counters of hypotheses
-  Hyp = 0:H,             % cost = 0: H doesn't cover any neg. examples
+  Hyp = 0:H,             % cost = 0: H doesnt cover any neg. examples
   complete(H).           % H covers all positive examples
 
 best_search( [C0:H0 | Hyps0], H)  :-
@@ -46,7 +46,7 @@ add_hyps( Hyps1, Hyps2, Hyps)  :-
   merge( Hyps2, OrderedHyps1, Hyps).
 
 complete( Hyp)  :-          % Hyp covers all positive examples
-  not ( ex( P),                          % A positive example
+  not( ex( P),                          % A positive example
         once( prove( P, Hyp, Answ)),     % Prove it with Hyp
         Answ \== yes).                   % Possibly not proved
 
@@ -81,7 +81,7 @@ covers_neg( Hyp, N)  :-         % Hyp covers N negative examples
 
 % unsatisfiable( Clause, Hyp):
 %   Clause can never be used in any proof, that is:
-%   Clause's body cannot be proved from Hyp
+%   Clauses body cannot be proved from Hyp
 
 unsatisfiable( [Head | Body], Hyp)  :-
   once( prove( Body, Hyp, Answ)), Answ = no.
@@ -111,7 +111,7 @@ refine_hyp( Hyp0, Hyp)  :-
   conc( Clauses1, [Clause/Vars | Clauses2], Hyp),          % New hypothesis
   refine( Clause0, Vars0, Clause, Vars),                   % Refine chosen clause  
   non_redundant( Clause),                         % No redundancy in Clause 
-  not unsatisfiable( Clause, Hyp).                % Clause not unsatisfiable
+  not(unsatisfiable( Clause, Hyp)).                % Clause not unsatisfiable
 
 choose_clause( Hyp, Clause, Clauses1, Clauses2)  :-  % Choose Clause from Hyp
     conc( Clauses1, [Clause | Clauses2], Hyp),       % Choose a clause
@@ -155,7 +155,7 @@ refine( Clause, Args, NewClause, NewArgs)  :-
 non_redundant( [_]).                % Single literal clause
 
 non_redundant( [Lit1 | Lits])  :-
-  not literal_member( Lit1, Lits),
+  not(literal_member( Lit1, Lits)),
   non_redundant( Lits).
 
 literal_member( X, [X1 | Xs])  :-   % X literally equal to member of list
