@@ -1,3 +1,5 @@
+consult('fig19_5.pl').
+
 % Figure 19.7  The HYPER program. The procedure prove/3 is as in Figure 19.3.
 
 % Program HYPER (Hypothesis Refiner) for learning in logic
@@ -46,9 +48,9 @@ add_hyps( Hyps1, Hyps2, Hyps)  :-
   merge( Hyps2, OrderedHyps1, Hyps).
 
 complete( Hyp)  :-          % Hyp covers all positive examples
-  not( ex( P),                          % A positive example
+  not(( ex( P),                          % A positive example
         once( prove( P, Hyp, Answ)),     % Prove it with Hyp
-        Answ \== yes).                   % Possibly not proved
+        Answ \== yes)).                   % Possibly not proved
 
 % eval( Hypothesis, Cost):
 %   Cost of Hypothesis = Size + 10 * # covered negative examples
@@ -108,18 +110,18 @@ start_hyp( [C | Cs], M)  :-
 
 refine_hyp( Hyp0, Hyp)  :-
   choose_clause( Hyp0, Clause0/Vars0, Clauses1, Clauses2), % Choose a clause
-  conc( Clauses1, [Clause/Vars | Clauses2], Hyp),          % New hypothesis
+  append( Clauses1, [Clause/Vars | Clauses2], Hyp),          % New hypothesis
   refine( Clause0, Vars0, Clause, Vars),                   % Refine chosen clause  
   non_redundant( Clause),                         % No redundancy in Clause 
   not(unsatisfiable( Clause, Hyp)).                % Clause not unsatisfiable
 
 choose_clause( Hyp, Clause, Clauses1, Clauses2)  :-  % Choose Clause from Hyp
-    conc( Clauses1, [Clause | Clauses2], Hyp),       % Choose a clause
+    append( Clauses1, [Clause | Clauses2], Hyp),       % Choose a clause
     nex(E),                                          % A negative example E
     prove( E, [Clause], yes),                        % Clause itself covers E
     !                                                % Clause must be refined 
     ;  
-    conc( Clauses1, [Clause | Clauses2], Hyp).       % Otherwise choose any clause  
+    append( Clauses1, [Clause | Clauses2], Hyp).       % Otherwise choose any clause  
 
 % refine( Clause, Args, NewClause, NewArgs):
 %   refine Clause with variables Args giving NewClause with NewArgs
@@ -127,9 +129,9 @@ choose_clause( Hyp, Clause, Clauses1, Clauses2)  :-  % Choose Clause from Hyp
 % Refine by unifying arguments 
 
 refine( Clause, Args, Clause, NewArgs)  :-
-  conc( Args1, [A | Args2], Args),               % Select a variable A
+  append( Args1, [A | Args2], Args),               % Select a variable A
   member( A, Args2),                             % Match it with another one
-  conc( Args1, Args2, NewArgs).
+  append( Args1, Args2, NewArgs).
 
 
 % Refine a variable to a term
@@ -137,7 +139,7 @@ refine( Clause, Args, Clause, NewArgs)  :-
 refine( Clause, Args0, Clause, Args)  :-
   del( Var:Type, Args0, Args1),       % Delete Var:Type from Args0
   term( Type, Var, Vars),             % Var becomes term of type Type 
-  conc( Args1, Vars, Args).           % Add variables in the new term
+  append( Args1, Vars, Args).           % Add variables in the new term
 
 % Refine by adding a literal
 
@@ -146,9 +148,9 @@ refine( Clause, Args, NewClause, NewArgs)  :-
   max_clause_length( MaxL),
   L < MaxL,
   backliteral( Lit, InArgs, RestArgs),   % Background knowledge literal
-  conc( Clause, [Lit], NewClause),       % Add literal to body of clause
+  append( Clause, [Lit], NewClause),       % Add literal to body of clause
   connect_inputs( Args, InArgs),         % Connect literal's inputs to other args.
-  conc( Args, RestArgs, NewArgs).        % Add rest of literal's arguments
+  append( Args, RestArgs, NewArgs).        % Add rest of literal's arguments
 
 % non_redundant( Clause): Clause has no obviously redundant literals
 
