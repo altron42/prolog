@@ -33,21 +33,21 @@ depth_first( Hyp0, Hyp, MaxD0)  :-
   depth_first( Hyp1, Hyp, MaxD1).
 
 complete( Hyp)  :-        % Hyp covers all positive examples
-  not(ex( E),                          % A positive example
+  not((ex( E),                          % A positive example
        once( prove( E, Hyp, Answer)),   % Prove it with Hyp
-       Answer \== yes).                 % Possibly not proved
+       Answer \== yes)).                 % Possibly not proved
 
 consistent( Hyp)  :-      % Hypothesis does not possibly cover any negative example
-  not(nex( E),                          % A negative example
+  not((nex( E),                          % A negative example
        once( prove( E, Hyp, Answer)),    % Prove it with Hyp
-       Answer \== no).                   % Possibly provable
+       Answer \== no)).                   % Possibly provable
 
 % refine_hyp( Hyp0, Hyp):
 %   refine hypothesis Hyp0 into Hyp
 
 refine_hyp( Hyp0, Hyp)  :-
-  conc( Clauses1, [Clause0/Vars0 | Clauses2], Hyp0),    % Choose Clause0 from Hyp0
-  conc( Clauses1, [Clause/Vars | Clauses2], Hyp),       % New hypothesis
+  append( Clauses1, [Clause0/Vars0 | Clauses2], Hyp0),    % Choose Clause0 from Hyp0
+  append( Clauses1, [Clause/Vars | Clauses2], Hyp),       % New hypothesis
   refine( Clause0, Vars0, Clause, Vars).                % Refine the Clause  
 
 % refine( Clause, Args, NewClause, NewArgs):
@@ -56,9 +56,9 @@ refine_hyp( Hyp0, Hyp)  :-
 % Refine by unifying arguments
 
 refine( Clause, Args, Clause, NewArgs)  :-
-  conc( Args1, [A | Args2], Args),               % Select a variable A
+  append( Args1, [A | Args2], Args),               % Select a variable A
   member( A, Args2),                             % Match it with another one
-  conc( Args1, Args2, NewArgs).
+  append( Args1, Args2, NewArgs).
 
 % Refine by adding a literal
 
@@ -67,8 +67,8 @@ refine( Clause, Args, NewClause, NewArgs)  :-
   max_clause_length( MaxL),
   L < MaxL,
   backliteral( Lit, Vars),                    % Background knowledge literal
-  conc( Clause, [Lit], NewClause),            % Add literal to body of clause
-  conc( Args, Vars, NewArgs).                 % Add literal's variables
+  append( Clause, [Lit], NewClause),            % Add literal to body of clause
+  append( Args, Vars, NewArgs).                 % Add literal's variables
 
 % Default parameter settings
 
