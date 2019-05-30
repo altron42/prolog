@@ -33,12 +33,12 @@ depth_first( Hyp0, Hyp, MaxD0)  :-
   depth_first( Hyp1, Hyp, MaxD1).
 
 complete( Hyp)  :-        % Hyp covers all positive examples
-  not (ex( E),                          % A positive example
+  not(ex( E),                          % A positive example
        once( prove( E, Hyp, Answer)),   % Prove it with Hyp
        Answer \== yes).                 % Possibly not proved
 
 consistent( Hyp)  :-      % Hypothesis does not possibly cover any negative example
-  not (nex( E),                          % A negative example
+  not(nex( E),                          % A negative example
        once( prove( E, Hyp, Answer)),    % Prove it with Hyp
        Answer \== no).                   % Possibly provable
 
