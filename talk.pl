@@ -338,6 +338,7 @@ pn( lunar,           lunar           ).
 pn( principia,       principia       ).
 pn( shrdlu,          shrdlu          ).
 pn( terry,           terry           ).
+pn( micael,          micael          ).
 
 iv( halt,    halts,    halted,    halted,    halting,      X^ ~halt(X)       ).
 
@@ -421,3 +422,20 @@ read_word(Char, [Char|Chars], Last) :-
    get0(Next),
    read_word(Next, Chars, Last).
 
+
+%%% space(Char)
+%%% ===========
+%%%
+%%%     Char ==> the ASCII code for the space
+%%%              character
+
+space(32).
+
+
+%%% newline(Char)
+%%% =============
+%%%
+%%%     Char ==> the ASCII code for the newline
+%%%              character
+
+newline(10).
