@@ -47,25 +47,25 @@ frase(Numero,Genero) -->  artigo(Numero,Genero) , sujeito(Numero,Genero).
 sujeito(Numero,Genero) --> pronome(Numero,Genero).
 sujeito(Numero,Genero) --> substantivo(Numero,Genero).
 sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero), preposicao(_).
-sujeito(Numero,Genero) --> adverbio(Numero,Genero), adjetivo(Numero,Genero).
+sujeito(Numero,Genero) --> adverbio(Numero), adjetivo(Numero,Genero).
 sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero).
 sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero), adjetivo(Numero,Genero).
 sujeito(Numero,Genero) --> substantivo(Numero,Genero) , conjuncao, substantivo(Numero,Genero).
 
-predicado(Numero,Genero) --> verbo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), substantivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), artigo(Numero,Genero), adjetivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), artigo(Numero,Genero), substantivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), artigo(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), artigo(Numero,Genero), pronome(Numero,_), substantivo(Numero,Genero), preposicao(_), verbo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), numeral(Numero,Genero), substantivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), numeral(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), preposicao(_), substantivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), preposicao(_), substantivo(Numero,Genero), preposicao(_), adjetivo(Numero,Genero),substantivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), preposicao(_), verbo(Numero,Genero), adverbio(Numero,Genero), adjetivo(Numero,Genero). 
-predicado(Numero,Genero) --> verbo(Numero,Genero), substantivo(Numero,Genero), artigo(Numero,Genero), substantivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero,Genero), substantivo(Numero,Genero), artigo(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero).
+predicado(Numero,Genero) --> verbo(Numero), substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), adjetivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), pronome(Numero,_), substantivo(Numero,Genero), preposicao(_), verbo(Numero).
+predicado(Numero,Genero) --> verbo(Numero), numeral(Numero,Genero), substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), numeral(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), preposicao(_), substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), preposicao(_), substantivo(Numero,Genero), preposicao(_), adjetivo(Numero,Genero),substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), preposicao(_), verbo(Numero), adverbio(Numero), adjetivo(Numero,Genero). 
+predicado(Numero,Genero) --> verbo(Numero), substantivo(Numero,Genero), artigo(Numero,Genero), substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), substantivo(Numero,Genero), artigo(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
 
 %Estou comprando um protetor solar.
 %Irei à praia.
