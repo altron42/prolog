@@ -1,5 +1,3 @@
-consult('fig19_5.pl').
-
 % Figure 19.7  The HYPER program. The procedure prove/3 is as in Figure 19.3.
 
 % Program HYPER (Hypothesis Refiner) for learning in logic
