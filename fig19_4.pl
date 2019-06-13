@@ -8,6 +8,7 @@
 %   refining start hypotheses
 
 induce( Hyp)  :-
+  init_counts, !,
   iter_deep( Hyp, 0).           % Iterative deepening starting with max. depth 0
 
 iter_deep( Hyp, MaxD) :-
@@ -29,6 +30,7 @@ depth_first( Hyp0, Hyp, MaxD0)  :-
   MaxD0 > 0,
   MaxD1 is MaxD0 - 1,
   refine_hyp( Hyp0, Hyp1),
+  add1( generated),               % Contador das hypothesis geradas
   complete( Hyp1),                % Hyp1 covers all positive examples
   depth_first( Hyp1, Hyp, MaxD1).
 
@@ -48,7 +50,7 @@ consistent( Hyp)  :-      % Hypothesis does not possibly cover any negative exam
 refine_hyp( Hyp0, Hyp)  :-
   append( Clauses1, [Clause0/Vars0 | Clauses2], Hyp0),    % Choose Clause0 from Hyp0
   append( Clauses1, [Clause/Vars | Clauses2], Hyp),       % New hypothesis
-  refine( Clause0, Vars0, Clause, Vars).                % Refine the Clause  
+  refine( Clause0, Vars0, Clause, Vars).                % Refine the Clause
 
 % refine( Clause, Args, NewClause, NewArgs):
 %   refine Clause with arguments Args giving NewClause with NewArgs
@@ -68,10 +70,25 @@ refine( Clause, Args, NewClause, NewArgs)  :-
   L < MaxL,
   backliteral( Lit, Vars),                    % Background knowledge literal
   append( Clause, [Lit], NewClause),            % Add literal to body of clause
-  append( Args, Vars, NewArgs).                 % Add literal's variables
+  append( Args, Vars, NewArgs).                 % Add literals variables
 
 % Default parameter settings
 
 max_proof_length( 6).   % Max. proof length, counting calls to 'non-prolog' pred.
 
 max_clause_length( 3).  % Max. number of literals in a clause
+
+init_counts :-
+  retract( counter(_,_)), fail        % Delete old counters
+  ;
+  assert( counter( generated, 0)),    % Init. counter 'generated'
+  assert( counter( refined, 0)).      % Init. counter 'refined'
+
+add1( Counter)  :-
+  retract( counter( Counter, N)), !, N1 is N+1,
+  assert( counter( Counter, N1)).
+
+show_counts :-
+  counter(generated, NG), counter( refined, NR),
+  nl, write( 'Hypotheses generated: '), write(NG), 
+  nl, write( 'Hypotheses refined:   '), write(NR), nl.
