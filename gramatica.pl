@@ -27,11 +27,11 @@ periodoSimples(Numero,Genero) --> predicado(Numero,Genero).
 periodoSimples(Numero,Genero) --> sujeito(Numero,Genero), predicado(Numero,Genero).
 
 periodoComposto(Numero,Genero) --> oracaoCoordenada(Numero,Genero).
-periodoComposto(Numero,Genero) --> oracaoCoordenada(Numero,Genero), sentenca.
+periodoComposto(Numero,Genero) --> oracaoCoordenada(Numero,Genero), sentenca(Numero,Genero).
 periodoComposto(Numero,Genero) --> oracaoCoordenada(Numero,Genero), conjuncao, sentenca.
 periodoComposto(Numero,Genero) --> oracaoSubordinada(Numero,Genero).
-periodoComposto(Numero,Genero) --> oracaoSubordinada(Numero,Genero), sentenca.
-periodoComposto(Numero,Genero) --> oracaoSubordinada(Numero,Genero), preposicao(_),sentenca.
+periodoComposto(Numero,Genero) --> oracaoSubordinada(Numero,Genero), sentenca(Numero,Genero).
+periodoComposto(Numero,Genero) --> oracaoSubordinada(Numero,Genero), preposicao(_), sentenca(_,_).
 periodoComposto(Numero,Genero) --> oracaoCoordenada(Numero,Genero), conjuncao, oracaoSubordinada(Numero,Genero).
 periodoComposto(Numero,Genero) --> oracaoSubordinada(Numero,Genero), conjuncao, oracaoCoordenada(Numero,Genero).
 
@@ -41,22 +41,22 @@ oracaoSubordinada(Numero,Genero) --> predicado(Numero,Genero).
 oracaoSubordinada(Numero,Genero) --> sujeito(Numero,Genero), predicado(Numero,Genero).
 
 frase(Numero,Genero) -->  sujeito(Numero,Genero).
-frase(Numero,Genero) -->  artigo(Numero,Genero) , sujeito(Numero,Genero).
-frase(Numero,Genero) -->  artigo(Numero,Genero) , sujeito(Numero,Genero).
+frase(Numero,Genero) -->  sujeito(Numero,Genero) , predicado(Numero,Genero).
+frase(Numero,Genero) -->  predicado(Numero,Genero), sujeito(Numero,Genero).
 
 sujeito(Numero,Genero) --> pronome(Numero,Genero).
 sujeito(Numero,Genero) --> substantivo(Numero,Genero).
-sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero), preposicao(_).
-sujeito(Numero,Genero) --> adverbio(Numero), adjetivo(Numero,Genero).
 sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero).
+sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero), preposicao(_).
 sujeito(Numero,Genero) --> artigo(Numero,Genero) , substantivo(Numero,Genero), adjetivo(Numero,Genero).
+sujeito(Numero,Genero) --> adverbio(Numero), adjetivo(Numero,Genero).
 sujeito(Numero,Genero) --> substantivo(Numero,Genero) , conjuncao, substantivo(Numero,Genero).
 
 predicado(Numero,Genero) --> verbo(Numero).
 predicado(Numero,Genero) --> verbo(Numero), substantivo(Numero,Genero).
 predicado(Numero,Genero) --> verbo(Numero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
 predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), adjetivo(Numero,Genero).
-predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), substantivo(Numero,Genero).
+predicado(Numero,Genero) --> verbo(Numero), artigo(_,_), substantivo(_,_).
 predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), substantivo(Numero,Genero), adjetivo(Numero,Genero).
 predicado(Numero,Genero) --> verbo(Numero), artigo(Numero,Genero), pronome(Numero,_), substantivo(Numero,Genero), preposicao(_), verbo(Numero).
 predicado(Numero,Genero) --> verbo(Numero), numeral(Numero,Genero), substantivo(Numero,Genero).
@@ -181,6 +181,7 @@ pronome(plural, feminino) --> [quantas].
 pronome(singular, masculino) --> [quanto].
 
 %SUBSTANTIVOS
+substantivo(singular, masculino) --> [vento].
 substantivo(singular, masculino) --> [gato].
 substantivo(plural, masculino) --> [gatos].
 substantivo(singular, masculino) --> [rato]. 
@@ -195,6 +196,8 @@ substantivo(singular, masculino) --> [filme].
 substantivo(plural, masculino) --> [filmes].
 substantivo(singular, masculino)--> [fim].
 substantivo(singular, feminino) --> [florida].
+substantivo(singular, feminino) --> [folha].
+substantivo(plural, feminino) --> [folhas].
 substantivo(singular, feminino) --> [fome].
 substantivo(singular, feminino) --> [fonte].
 substantivo(singular, feminino) --> ['força'].
@@ -323,6 +326,7 @@ substantivo(plural, masculino) --> [jogos].
 substantivo(singular, masculino) --> [juscelino].
 substantivo(singular, feminino) --> ['justiça'].
 substantivo(singular, masculino) --> ['lá'].
+substantivo(singular, masculino) --> ['lápis'].
 substantivo(singular, masculino) --> [labirinto].
 substantivo(singular, masculino) --> ['laboratório'].
 substantivo(singular, masculino) --> [lado].
@@ -1383,6 +1387,7 @@ verbo(singular) --> [pensava].
 verbo(singular) --> [pensava].
 verbo(singular) --> [pense].
 verbo(singular) --> [pense].
+verbo(singular) --> [perdeu].
 verbo(singular) --> [perder].
 verbo(singular) --> [perder].
 verbo(plural) --> [perder].
@@ -1522,6 +1527,8 @@ verbo(singular) --> [pudesse].
 verbo(singular) --> [pudesse].
 verbo(singular) --> [pulo].
 verbo(singular) --> [pulo].
+verbo(singular) --> [sacudir].
+verbo(singular) --> [sacudia].
 verbo(plural) --> [abastecemos].
 verbo(plural) --> [abastecemos].
 verbo(singular) -->[duvidas].
@@ -1727,6 +1734,9 @@ verbo(singular) --> [baixado].
 verbo(singular) --> [baixado].
 verbo(singular) --> ['balança'].
 verbo(singular) --> ['balança'].
+verbo(singular) --> [canta].
+verbo(singular) --> [canta].
+verbo(singular) --> [cantam].
 verbo(plural) --> [careciam].
 verbo(plural) --> [careciam].
 verbo(plural) --> [careciam].
