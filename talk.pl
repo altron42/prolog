@@ -228,7 +228,7 @@ q(S => ~answer(X)) -->
 q(S => ~answer(yes)) --> 
    sinv(S, nogap).
 q(S => ~answer(yes)) -->
-   [is], 
+   ['é'], 
    np((X^S0)^S, nogap), 
    np((X^true)^exists(X,S0&true), nogap).
 
@@ -263,7 +263,7 @@ vp(Form2, VP2, GapInfo) -->
    np(NP, nogap), 
    vp(Form1, VP1, GapInfo).
 vp(finite, X^S, GapInfo) -->
-   [is],
+   ['é'],
    np((X^P)^exists(X,S&P), GapInfo).
 
 optrel((X^S1)^(X^(S1&S2))) -->
@@ -319,16 +319,33 @@ whpron( who  ).
 whpron( whom ).
 whpron( what ).
 
-det( every, (X^S1)^(X^S2)^   all(X,S1=>S2) ).
-det( a,     (X^S1)^(X^S2)^exists(X,S1&S2)  ).
-det( some,  (X^S1)^(X^S2)^exists(X,S1&S2)  ).
+whpron( por ).
+whpron( porque ).
+whpron( que ).
+whpron( quais ).
+whpron( qual ).
+whpron( quantos ).
+whpron( quanto ).
+whpron( quantas ).
+whpron( quanta ).
+whpron( quem ).
+whpron( quando ).
+whpron( para ).
+whpron( como ).
 
-n( author,     X^ ~author(X)     ).
-n( book,       X^ ~book(X)       ).
+det( todos, (X^S1)^(X^S2)^   all(X,S1=>S2) ).
+det( um,     (X^S1)^(X^S2)^exists(X,S1&S2)  ).
+det( uma,     (X^S1)^(X^S2)^exists(X,S1&S2)  ).
+det( algum,  (X^S1)^(X^S2)^exists(X,S1&S2)  ).
+det( alguma,  (X^S1)^(X^S2)^exists(X,S1&S2)  ).
+
+n( autor,     X^ ~autor(X)     ).
+n( livros,       X^ ~livro(X)       ).
+n( livro,       X^ ~livro(X)       ).
 n( professor,  X^ ~professor(X)  ).
-n( program,    X^ ~program(X)    ).
-n( programmer, X^ ~programmer(X) ).
-n( student,    X^ ~student(X)    ).
+n( programa,    X^ ~programa(X)    ).
+n( programador, X^ ~programador(X) ).
+n( estudante,    X^ ~estudante(X)    ).
 
 pn( begriffsschrift, begriffsschrift ).
 pn( bertrand,        bertrand        ).
@@ -343,6 +360,7 @@ pn( micael,          micael          ).
 iv( halt,    halts,    halted,    halted,    halting,      X^ ~halt(X)       ).
 
 tv( write,   writes,   wrote,     written,   writing,    X^Y^ ~writes(X,Y)   ).
+tv( escrever,   escreve,  escreveu,   escrito,  escrevendo,    X^Y^ ~escrever(X,Y)   ).
 tv( meet,    meets,    met,       met,       meeting,    X^Y^ ~meets(X,Y)    ).
 tv( concern, concerns, concerned, concerned, concerning, X^Y^ ~concerns(X,Y) ).
 tv( run,     runs,     ran,       run,       running,    X^Y^ ~runs(X,Y)     ).
