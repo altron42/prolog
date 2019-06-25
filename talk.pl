@@ -434,12 +434,20 @@ read_sent(Char, [Word|Words]) :-
 % Space and newline end a word.
 read_word(32, [], 32) :- !.
 read_word(10, [], 10) :- !.
+read_word(63, [], 63) :- !.
 
 % All other chars are added to the list.
 read_word(Char, [Char|Chars], Last) :-
    get0(Next),
    read_word(Next, Chars, Last).
 
+%%% question(Char)
+%%% ===========
+%%%
+%%%     Char ==> the ASCII code for the question
+%%%              character
+
+question(63).
 
 %%% space(Char)
 %%% ===========
