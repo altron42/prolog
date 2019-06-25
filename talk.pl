@@ -415,6 +415,12 @@ read_sent(32, Words) :- !,
     get0(Char),
     read_sent(Char, Words).
 
+% Question mark is added as new word.
+read_sent(63, [Word|Words]) :- !,
+    name(Word,[63]),
+    get0(Char),
+    read_sent(Char, Words).
+
 % Everything else starts a word.
 read_sent(Char, [Word|Words]) :-
     % get the word
@@ -431,10 +437,10 @@ read_sent(Char, [Word|Words]) :-
 %%%     Chars ==> list of characters read from standard input and 
 %%%               delimited by spaces or newlines
 
-% Space and newline end a word.
+% Space, newline and question mark end a word.
 read_word(32, [], 32) :- !.
-read_word(10, [], 10) :- !.
 read_word(63, [], 63) :- !.
+read_word(10, [], 10) :- !.
 
 % All other chars are added to the list.
 read_word(Char, [Char|Chars], Last) :-
