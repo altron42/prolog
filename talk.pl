@@ -225,12 +225,33 @@ q(S => ~answer(X)) -->
    whpron, vp(finite, X^S, nogap).
 q(S => ~answer(X)) --> 
    whpron, sinv(S, gap(np, X)).
-q(S => ~answer(yes)) --> 
+q(S => ~answer(sim)) --> 
    sinv(S, nogap).
-q(S => ~answer(yes)) -->
+
+q(S => ~answer(X)) -->
+    whpron,
+    ['é'],
+    np((X^S0)^S, nogap),
+    interrogacao.
+
+q(S => ~answer(X)) -->
+    whpron,
+    np((X^S0)^S, nogap),
+    ['é'],
+    interrogacao.
+
+q(S => ~answer(sim)) -->
    ['é'], 
    np((X^S0)^S, nogap), 
-   np((X^true)^exists(X,S0&true), nogap).
+   np((X^true)^exists(X,S0&true), nogap),
+   interrogacao.
+   
+q(S => ~answer('sim, meu consagrado')) -->
+   np((X^S0)^S, nogap),
+   ['é'], 
+   np((X^true)^exists(X,S0&true), nogap),
+   interrogacao.
+
 
 s(S, GapInfo) --> 
    np(VP^S, nogap), 
@@ -305,11 +326,13 @@ rov(pres_participle/Requires, LF) --> [ROV], {rov(_, _, _, _, ROV, LF, Requires)
 aux(Form, LF) --> [Aux], {aux(Aux, Form, LF)}.
 relpron --> [RP], {relpron(RP)}.
 whpron --> [WH], {whpron(WH)}.
-
+interrogacao --> [IN], {interrogacao(IN)}.
 
 /*----------------------------------------------------------------------
                              Lexical Items
 ----------------------------------------------------------------------*/
+
+interrogacao( '?' ).
 
 relpron( that ).
 relpron( who  ).
@@ -320,7 +343,6 @@ whpron( whom ).
 whpron( what ).
 
 whpron( por ).
-whpron( porque ).
 whpron( que ).
 whpron( quais ).
 whpron( qual ).
